@@ -27,9 +27,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf llvm clang
+      - name: Sync node version and setup cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: 'npm' # Set this to npm, yarn or pnpm.
       - name: install frontend dependencies
         run: |
-          npm install -g npx
+          # npm install -g npx
           npm install -D tailwindcss
           npm i -D daisyui@latest
           cargo install --locked trunk
