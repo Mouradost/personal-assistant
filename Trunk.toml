@@ -1,0 +1,18 @@
+[build]
+target = "./public/index.html"
+dist = "dist"
+
+[watch]
+watch = ["./src"]
+ignore = ["./src-tauri"]
+
+[serve]
+address = "127.0.0.1"
+port = 1420
+open = false
+
+[[hooks]]
+stage = "pre_build"
+command = "npx"
+command_arguments = ["tailwindcss", "-i", "./public/input.css", "-o", "./public/styles.css", "--minify"]
+
