@@ -29,6 +29,8 @@ jobs:
           sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
       - name: install frontend dependencies
         run: |
+          cargo install --locked trunk
+          cargo install --locked wasm-bindgen-cli
           npm install -D tailwindcss
           npm i -D daisyui@latest
       - uses: tauri-apps/tauri-action@v0
