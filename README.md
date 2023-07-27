@@ -1,7 +1,19 @@
-# Tauri + Leptos
+# Personal assistant
 
-This template should help get you started developing with Tauri and Leptos.
+Personal assistant is an APP that allows the user to use widely distributed open source Large Language Modes (LLM) on a personal computer.
 
-## Recommended IDE Setup
+![Personal Assistant Demo](./docs/assets/demo.webm)
 
-[VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+<!-- ![Personal Assistant Demo](https://www.youtube.com/watch?v=bIKHKMoW_r4) -->
+
+## Note
+
+This is only a demo and is in early stage, it is not ready for production yet !
+
+## Examples
+
+![Example_1](./docs/assets/examples1.png)
+![Example_2](./docs/assets/examples2.png)
+![Example_3](./docs/assets/examples3.png)
+![Example_4](./docs/assets/examples4.png)
+![Example_5](./docs/assets/examples5.png)
