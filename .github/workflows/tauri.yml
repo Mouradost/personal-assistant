@@ -38,6 +38,7 @@ jobs:
       #     cache: 'npm'
       - name: install frontend dependencies
         run: |
+          npm install --save-exact esbuild
           npm install -D tailwindcss
           npm i -D daisyui@latest
           cargo install --locked trunk
