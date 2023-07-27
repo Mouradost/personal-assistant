@@ -44,7 +44,7 @@ futures = "0.3"
 # Javascript premitive
 js-sys = "0.3"
 # Tauri API
-tauri-sys = { git = "https://github.com/JonasKruckenberg/tauri-sys", features = ["all"]}
+tauri-sys = { git = "https://github.com/Mouradost/tauri-sys.git", features = ["all"]}
 # Time
 chrono = "0.4"
 
