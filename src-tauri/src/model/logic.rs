@@ -10,7 +10,7 @@ pub async fn predict<R: Runtime>(
     message: &str,
     state: tauri::State<'_, Model>,
 ) -> Result<llm::InferenceStats, String> {
-    println!("Predict {message:#?}");
+    tracing::debug!("Predict {message:#?}");
     let model_guard = state.model.lock().map_err(|err| err.to_string())?;
     let model = match model_guard.as_ref(){
         Some(model) => model,
@@ -52,11 +52,11 @@ pub async fn predict<R: Runtime>(
 
     match res {
         Ok(result) => {
-            println!("\n{result}");
+            tracing::debug!("\n{result}");
             Ok(result)
         }
         Err(err) => {
-            eprintln!("\n{err}");
+            tracing::error!("\n{err}");
             Err("Error".to_string())
         }
     }
@@ -66,14 +66,14 @@ pub async fn predict<R: Runtime>(
 pub async fn load_dynamic_model(
     state: tauri::State<'_, Model>,
 ) -> Result<String, String> {
-    println!("Loading model");
+    tracing::debug!("Loading model");
     let model_config_guard = state.model_config.lock().map_err(|err| err.to_string())?;
     let model_config = match model_config_guard.as_ref(){
         Some(model_config) => model_config,
         None => return Err("Model config not found".to_string()),
     };
 
-    println!("Got model_config: {:#?}", state.model_config);
+    tracing::info!("Got model_config: {:#?}", state.model_config);
     let model = llm::load_dynamic(
         Some(model_config.model_architecture),
         &model_config.model_path,
@@ -89,7 +89,7 @@ pub async fn load_dynamic_model(
 
 #[tauri::command]
 pub async fn unload_dynamic_model(state: tauri::State<'_, Model>) -> Result<String, String> {
-    println!("Unloading model");
+    tracing::info!("Unloading model");
     *state.model.lock().map_err(|err| err.to_string())? = None;
     Ok(String::from("Model unloaded"))
 }
@@ -99,7 +99,7 @@ pub async fn load_model_config(
     model_config: ModelConfig,
     state: tauri::State<'_, Model>,
 ) -> Result<String, String> {
-    println!("Loading config {model_config:#?}");
+    tracing::info!("Loading config {model_config:#?}");
     *state.model_config.lock().map_err(|err| err.to_string())? =  Some(model_config);
     Ok(format!("Model config loaded"))
 }

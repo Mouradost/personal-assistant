@@ -1,7 +1,8 @@
 use crate::model::ModelConfig;
 
 use super::Database;
-use surrealdb::{engine::local::File, Surreal};
+// use surrealdb::{engine::local::File, Surreal};
+use surrealdb::{engine::local::Mem, Surreal};
 use tauri::{Runtime, Window};
 
 #[tauri::command]
@@ -20,7 +21,8 @@ pub async fn connect(
         .unwrap_or_default();
     tracing::info!("App data dir is: {}", app_data_dir.display());
     // Connect to the local storage
-    let db = Surreal::new::<File>(format!("{}/db", app_data_dir.display()).as_str())
+    // let db = Surreal::new::<File>(format!("{}/db", app_data_dir.display()).as_str())
+    let db = Surreal::new::<Mem>(())
         .await
         .map_err(|err| err.to_string())?;
     // Select a specific namespace / database

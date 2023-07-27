@@ -1,7 +1,8 @@
 use std::sync::Arc;
 use surrealdb::{
-    engine::local::{Db, File},
-    Surreal
+    // engine::local::{Db, File},
+    engine::local::{Db, Mem},
+    Surreal,
 };
 use tauri::async_runtime::Mutex;
 use tauri::{App, Manager};
@@ -21,10 +22,10 @@ impl Database {
                 .path_resolver()
                 .app_data_dir()
                 .unwrap_or_default();
+            tracing::info!("App data dir is: {}", app_data_dir.display());
             // Initialize the database in the app data file
-            let db = Surreal::new::<File>(format!("{}/db", app_data_dir.display()).as_str())
-                .await
-                .unwrap();
+            // let db = Surreal::new::<File>(format!("{}/db", app_data_dir.display()).as_str())
+            let db = Surreal::new::<Mem>(()).await.unwrap();
             // Select a specific namespace / database
             db.use_ns("my_ns")
                 .use_db("my_db")
@@ -39,4 +40,3 @@ impl Database {
         Ok(())
     }
 }
-

@@ -30,7 +30,7 @@ jobs:
       - name: install dependencies (macos only)
         if: matrix.platform == 'macos-latest'
         run: |
-          brew install llvm clang
+          brew install llvm
       - name: Sync node version and setup cache
         uses: actions/setup-node@v3
         with:

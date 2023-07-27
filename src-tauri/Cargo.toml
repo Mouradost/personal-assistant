@@ -12,9 +12,12 @@ tauri-build = { version = "1.4", features = [] }
 
 [dependencies]
 # Backend
-tauri = { version = "1.4", features = [ "dialog-message", "dialog-open", "shell-open"] }
+tauri = { version = "1.4", features = [ "os-all", "dialog-confirm", "dialog-ask", "updater", "dialog-message", "dialog-open", "shell-open"] }
 # Database
-surrealdb = {git = "https://github.com/surrealdb/surrealdb.git", branch = "main", features = ["kv-rocksdb"] }
+surrealdb = {git = "https://github.com/surrealdb/surrealdb.git", branch = "main", features = ["kv-mem"] }
+# For persistant database for now it is disabled because of build issues on macos and windows
+# surrealdb = {git = "https://github.com/surrealdb/surrealdb.git", branch = "main", features = ["kv-rocksdb"] }
+
 # Json
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"

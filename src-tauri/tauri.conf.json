@@ -19,13 +19,21 @@
       },
       "dialog": {
         "message": true,
-        "open": true
+        "open": true,
+        "confirm": true,
+        "ask": true
+      },
+      "os": {
+        "all": true
       }
     },
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "lbk.ai.assistant",
+      "identifier": "ai.lbk.assistant",
+      "copyright": "© 2023 Lablack Mourad",
+      "category": "DeveloperTool",
+      "targets": "all",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -49,6 +57,14 @@
         "minWidth": 600,
         "minHeight": 800
       }
-    ]
+    ],
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://gist.github.com/Mouradost/a398399a40d6b53b0b1acb30734e9777/raw/01a5e3ee7d4d43395b4925b986a611bca944d0c1/latest.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENBRDM0QUFFOTlFRjRGN0YKUldSL1QrK1pya3JUeWh6ZE1HNXJpcnBDalhuVGV3K0RnSklVaDBBK2lCZ3V6U0o4ZU1WSHdsWHQK"
+    }
   }
 }
