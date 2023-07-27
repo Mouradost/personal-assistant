@@ -34,11 +34,10 @@ jobs:
       - name: Sync node version and setup cache
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
-          cache: 'npm' # Set this to npm, yarn or pnpm.
+          node-version: 'latest'
+          cache: 'npm'
       - name: install frontend dependencies
         run: |
-          # npm install -g npx
           npm install -D tailwindcss
           npm i -D daisyui@latest
           cargo install --locked trunk
@@ -46,13 +45,22 @@ jobs:
       - name: install frontend dependencies (windows only)
         if: matrix.platform == 'windows-latest'
         run: |
-          npm install npx
+          npm install -g npx
+      - name: show versions
+        run: |
+          rustc --version
+          npm --version
+          npx --version
+          cargo --version
+          trunk --version
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         with:
-          tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
-          releaseName: 'App v__VERSION__'
+          tagName: v__VERSION__
+          releaseName: 'v__VERSION__'
           releaseBody: 'See the assets to download this version and install.'
-          releaseDraft: true
+          releaseDraft: false
           prerelease: false
