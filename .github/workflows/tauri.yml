@@ -30,7 +30,7 @@ jobs:
       - name: install dependencies (macos only)
         if: matrix.platform == 'macos-latest'
         run: |
-          brew install llvm
+          brew install llvm clang
       - name: Sync node version and setup cache
         uses: actions/setup-node@v3
         with:
@@ -43,6 +43,10 @@ jobs:
           npm i -D daisyui@latest
           cargo install --locked trunk
           cargo install --locked wasm-bindgen-cli
+      - name: install frontend dependencies (windows only)
+        if: matrix.platform == 'windows-latest'
+        run: |
+          npm install npx
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

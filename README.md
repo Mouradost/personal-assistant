@@ -2,9 +2,8 @@
 
 Personal assistant is an APP that allows the user to use widely distributed open source Large Language Modes (LLM) on a personal computer.
 
-![Personal Assistant Demo](./docs/assets/demo.webm)
-
-<!-- ![Personal Assistant Demo](https://www.youtube.com/watch?v=bIKHKMoW_r4) -->
+<video src="./docs/assets/demo.webm" controls="controls" width="100%" >
+ </video>
 
 ## Note
 
@@ -12,8 +11,10 @@ This is only a demo and is in early stage, it is not ready for production yet !
 
 ## Examples
 
-![Example_1](./docs/assets/examples1.png)
-![Example_2](./docs/assets/examples2.png)
-![Example_3](./docs/assets/examples3.png)
-![Example_4](./docs/assets/examples4.png)
-![Example_5](./docs/assets/examples5.png)
+<div align="center" width="100%" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 15px;">
+    <img src="./docs/assets/examples1.png" alt="Example_1" width="100%" />
+    <img src="./docs/assets/examples3.png" alt="Example_3" width="100%" />
+    <img src="./docs/assets/examples2.png" alt="Example_2" width="100%" />
+    <img src="./docs/assets/examples4.png" alt="Example_4" width="100%" />
+    <img src="./docs/assets/examples5.png" alt="Example_5" width="100%" style="grid-column-start: 1; grid-column-end: 3;"/>
+</div>
