@@ -18,7 +18,10 @@
         "open": true
       },
       "dialog": {
-        "message": true
+        "open": true,
+        "message": true,
+        "ask": true,
+        "confirm": true
       },
       "os": {
         "all": true
