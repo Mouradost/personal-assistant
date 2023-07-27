@@ -31,11 +31,11 @@ jobs:
         if: matrix.platform == 'macos-latest'
         run: |
           brew install llvm
-      - name: Sync node version and setup cache
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'latest'
-          cache: 'npm'
+      # - name: Sync node version and setup cache
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 'latest'
+      #     cache: 'npm'
       - name: install frontend dependencies
         run: |
           npm install -D tailwindcss
