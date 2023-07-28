@@ -25,22 +25,20 @@ jobs:
 
       - uses: Jimver/cuda-toolkit@v0.2.11
         name: Install CUDA toolkit on Linux
-        if: matrix.os == 'ubuntu-latest'
+        if: matrix.platform == 'ubuntu-latest'
         id: cuda-toolkit-linux
         with:
           cuda: '12.2.0'
           method: 'network'
-          #See e.g. https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/
           non-cuda-sub-packages: '["libcublas","libcublas-dev"]'
           sub-packages: '["nvcc","compiler","libraries","libraries-dev","cudart","cudart-dev"]'
 
       - uses: Jimver/cuda-toolkit@v0.2.11
         name: Install CUDA toolkit on Windows
-        if: matrix.os == 'windows-latest'
+        if: matrix.platform == 'windows-latest'
         id: cuda-toolkit-windows
         with:
           cuda: '12.2.0'
-          #See https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#install-the-cuda-software
           method: 'local'
 
       - name: install dependencies (ubuntu only)

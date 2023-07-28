@@ -1,6 +1,6 @@
 [package]
 name = "personal-assistant-ui"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 authors = ["Mourad Lablack <mouradost@gmail.com>"]
 description = "Personal assistant is an APP that allows the user to use widely distributed open source Large Language Modes (LLM) on a personal computer."
