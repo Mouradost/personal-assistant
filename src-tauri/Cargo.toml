@@ -23,12 +23,23 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 # Random numbers generator
 rand = "0.8"
-# AI lib for LLM models (Large Language Models)
-llm = { git = "https://github.com/rustformers/llm" , branch = "main" }
 # Logging
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 tracing-appender = "0.2" # For file output
 
+# AI lib for LLM models (Large Language Models)
+[target.'cfg(target_os = "macos")'.dependencies]
+llm = { git = "https://github.com/rustformers/llm", branch = "main", features = ["metal"] }
+
+[target.'cfg(not(target_os = "macos"))'.dependencies]
+# GPU support "cublas"
+llm = { git = "https://github.com/rustformers/llm", branch = "main", features = ["cublas"] } 
+# CPU only
+# llm = { git = "https://github.com/rustformers/llm", branch = "main", features = [] } 
+
 [features]
 custom-protocol = ["tauri/custom-protocol"]
+
+[profile.dev.package.ggml-sys]
+opt-level = 3

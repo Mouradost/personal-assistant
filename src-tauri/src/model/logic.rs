@@ -3,7 +3,6 @@ use tauri::{Runtime, Window};
 
 use super::{Model, ModelConfig};
 
-
 #[tauri::command]
 pub async fn predict<R: Runtime>(
     win: Window<R>,
@@ -12,7 +11,7 @@ pub async fn predict<R: Runtime>(
 ) -> Result<llm::InferenceStats, String> {
     tracing::debug!("Predict {message:#?}");
     let model_guard = state.model.lock().map_err(|err| err.to_string())?;
-    let model = match model_guard.as_ref(){
+    let model = match model_guard.as_ref() {
         Some(model) => model,
         None => return Err("Model not found".to_string()),
     };
@@ -63,22 +62,27 @@ pub async fn predict<R: Runtime>(
 }
 
 #[tauri::command]
-pub async fn load_dynamic_model(
-    state: tauri::State<'_, Model>,
-) -> Result<String, String> {
+pub async fn load_dynamic_model(state: tauri::State<'_, Model>) -> Result<String, String> {
     tracing::debug!("Loading model");
     let model_config_guard = state.model_config.lock().map_err(|err| err.to_string())?;
-    let model_config = match model_config_guard.as_ref(){
+    let model_config = match model_config_guard.as_ref() {
         Some(model_config) => model_config,
         None => return Err("Model config not found".to_string()),
     };
 
     tracing::info!("Got model_config: {:#?}", state.model_config);
+    let model_params = llm::ModelParameters {
+        use_gpu: true, // not working for now
+        ..Default::default()
+    };
+
+    // tracing::info!(use_gpu=model_params.backend(), "");
     let model = llm::load_dynamic(
         Some(model_config.model_architecture),
         &model_config.model_path,
         model_config.tokenizer_source.clone(),
-        Default::default(),
+        // Default::default(),
+        model_params,
         llm::load_progress_callback_stdout,
     )
     .map_err(|err| err.to_string())?;
@@ -100,7 +104,6 @@ pub async fn load_model_config(
     state: tauri::State<'_, Model>,
 ) -> Result<String, String> {
     tracing::info!("Loading config {model_config:#?}");
-    *state.model_config.lock().map_err(|err| err.to_string())? =  Some(model_config);
+    *state.model_config.lock().map_err(|err| err.to_string())? = Some(model_config);
     Ok(format!("Model config loaded"))
 }
-

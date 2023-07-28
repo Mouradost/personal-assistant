@@ -9,9 +9,9 @@ fn main() {
         .setup(|app| {
             model::Model::init(app)?;
             db::Database::init(app)?;
-            log::setup_logger(app, log::LoggerOutput::Stdout, tracing::Level::INFO);
-            // log to ~/.config/lbk.ai.assistant/logs
-            // log::setup_logger(app, log::LoggerOutput::default(), tracing::Level::INFO);
+            // log::setup_logger(app, log::LoggerOutput::Stdout, tracing::Level::INFO);
+            // log to ~/.config/ai.lbk.assistant/logs
+            log::setup_logger(app, log::LoggerOutput::default(), tracing::Level::INFO);
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![

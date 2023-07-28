@@ -22,6 +22,27 @@ jobs:
         with:
           toolchain: nightly
           targets: wasm32-unknown-unknown
+
+      - uses: Jimver/cuda-toolkit@v0.2.11
+        name: Install CUDA toolkit on Linux
+        if: matrix.os == 'ubuntu-latest'
+        id: cuda-toolkit-linux
+        with:
+          cuda: '12.2.0'
+          method: 'network'
+          #See e.g. https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/
+          non-cuda-sub-packages: '["libcublas","libcublas-dev"]'
+          sub-packages: '["nvcc","compiler","libraries","libraries-dev","cudart","cudart-dev"]'
+
+      - uses: Jimver/cuda-toolkit@v0.2.11
+        name: Install CUDA toolkit on Windows
+        if: matrix.os == 'windows-latest'
+        id: cuda-toolkit-windows
+        with:
+          cuda: '12.2.0'
+          #See https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#install-the-cuda-software
+          method: 'local'
+
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-20.04'
         run: |
@@ -65,3 +86,10 @@ jobs:
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: false
           prerelease: false
+      - name: Create 'latest' tag alias
+        run: |
+          LATEST_TAG=$(git tag --list 'v*.*.*' --sort=-v:refname | head -n 1)
+          git tag -d latest || true
+          git tag latest $LATEST_TAG
+          git push origin :refs/tags/latest || true
+          git push origin --tags
