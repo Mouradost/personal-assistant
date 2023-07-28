@@ -8,6 +8,21 @@ use tauri::{App, Manager};
 pub mod logic;
 pub mod simulated;
 
+#[derive(Serialize, Deserialize, Debug, Default)]
+#[serde(remote="llm::ModelParameters")]
+pub struct ModelParameters {
+    pub prefer_mmap: bool,
+    pub context_size: usize,
+    pub lora_adapters: Option<Vec<PathBuf>>,
+    pub use_gpu: bool,
+    pub gpu_layers: Option<usize>,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct ModelParametersWrapper{
+    #[serde(with = "ModelParameters")]
+    model_params: llm::ModelParameters
+}
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 #[serde(remote="llm::ModelArchitecture")]

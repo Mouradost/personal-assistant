@@ -1,7 +1,7 @@
 use std::{convert::Infallible, io::Write};
 use tauri::{Runtime, Window};
 
-use super::{Model, ModelConfig};
+use super::{Model, ModelConfig, ModelParametersWrapper};
 
 #[tauri::command]
 pub async fn predict<R: Runtime>(
@@ -62,7 +62,7 @@ pub async fn predict<R: Runtime>(
 }
 
 #[tauri::command]
-pub async fn load_dynamic_model(state: tauri::State<'_, Model>) -> Result<String, String> {
+pub async fn load_dynamic_model(params: ModelParametersWrapper, state: tauri::State<'_, Model>) -> Result<String, String> {
     tracing::debug!("Loading model");
     let model_config_guard = state.model_config.lock().map_err(|err| err.to_string())?;
     let model_config = match model_config_guard.as_ref() {
@@ -71,10 +71,11 @@ pub async fn load_dynamic_model(state: tauri::State<'_, Model>) -> Result<String
     };
 
     tracing::info!("Got model_config: {:#?}", state.model_config);
-    let model_params = llm::ModelParameters {
-        use_gpu: true, // not working for now
-        ..Default::default()
-    };
+    tracing::info!("Got model_params: {:#?}", params.model_params);
+    // let model_params = llm::ModelParameters {
+    //     use_gpu: true, // not working for now
+    //     ..Default::default()
+    // };
 
     // tracing::info!(use_gpu=model_params.backend(), "");
     let model = llm::load_dynamic(
@@ -82,7 +83,7 @@ pub async fn load_dynamic_model(state: tauri::State<'_, Model>) -> Result<String
         &model_config.model_path,
         model_config.tokenizer_source.clone(),
         // Default::default(),
-        model_params,
+        params.model_params,
         llm::load_progress_callback_stdout,
     )
     .map_err(|err| err.to_string())?;

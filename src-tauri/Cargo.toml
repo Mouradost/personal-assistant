@@ -36,9 +36,9 @@ llm = { git = "https://github.com/rustformers/llm", branch = "main", features = 
 
 [target.'cfg(not(target_os = "macos"))'.dependencies]
 # GPU support "cublas"
-llm = { git = "https://github.com/rustformers/llm", branch = "main", features = ["cublas"] } 
+# llm = { git = "https://github.com/rustformers/llm", branch = "main", features = ["cublas"] } 
 # CPU only
-# llm = { git = "https://github.com/rustformers/llm", branch = "main", features = [] } 
+llm = { git = "https://github.com/rustformers/llm", branch = "main", features = [] } 
 
 [features]
 custom-protocol = ["tauri/custom-protocol"]

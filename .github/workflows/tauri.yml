@@ -84,10 +84,10 @@ jobs:
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: false
           prerelease: false
-      - name: Create 'latest' tag alias
-        run: |
-          LATEST_TAG=$(git tag --list 'v*.*.*' --sort=-v:refname | head -n 1)
-          git tag -d latest || true
-          git tag latest $LATEST_TAG
-          git push origin :refs/tags/latest || true
-          git push origin --tags
+      # - name: Create 'latest' tag alias
+      #   run: |
+      #     LATEST_TAG=$(git tag --list 'v*.*.*' --sort=-v:refname | head -n 1)
+      #     git tag -d latest || true
+      #     git tag latest $LATEST_TAG
+      #     git push origin :refs/tags/latest || true
+      #     git push origin --tags

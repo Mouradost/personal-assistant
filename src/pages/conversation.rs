@@ -93,7 +93,7 @@ Assistant: "#.to_string());
                 when=move || { !is_valid_template() }
                 fallback=|cx| view! { cx, <p class="text-green-500 text-xs mx-2">"Valid template !"</p> }
               >
-                <p class="text-red-500 text-xs mx-2">"The template should contain '{{PROMPT}}' which will be use to inject the user message !"</p>
+                <p class="text-red-500 text-xs mx-2">"The template should contain "<br>"{{PROMPT}}"</br>" which will be use to inject the user message !"</p>
               </Show>
         </div>
         // Conversation area"
@@ -123,7 +123,7 @@ Assistant: "#.to_string());
                 />
                 <button
                     type="submit"
-                    disabled=move || user_input.with(String::is_empty) | !is_valid_template() | !is_model_connected() | is_model_predicting()
+                    prop:disabled=move || user_input.with(String::is_empty) | !is_valid_template() | !is_model_connected() | is_model_predicting()
                     class="btn flex-0 mx-2"
                 >
                     <Icon class="h-5 w-5" icon=icon!(BsSendFill)/>

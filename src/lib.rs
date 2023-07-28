@@ -15,6 +15,39 @@ use tauri_sys::{
 pub mod components;
 pub mod pages;
 
+#[derive(Clone, Serialize, Deserialize, Debug)]
+pub struct PayloadModelParams {
+    pub params: ModelParams,
+}
+
+#[derive(Clone, Serialize, Deserialize, Debug)]
+pub struct ModelParams {
+    pub model_params: ModelParameters,
+}
+
+
+
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+pub struct ModelParameters {
+    pub prefer_mmap: bool,
+    pub context_size: usize,
+    pub lora_adapters: Option<Vec<PathBuf>>,
+    pub use_gpu: bool,
+    pub gpu_layers: Option<usize>,
+}
+
+impl Default for ModelParameters {
+    fn default() -> Self {
+        Self {
+            prefer_mmap: true,
+            context_size: 2048,
+            lora_adapters: None,
+            use_gpu: false,
+            gpu_layers: None,
+        }
+    }
+}
+
 #[derive(Clone, PartialEq, Debug, Default)]
 pub enum Entity {
     #[default]
@@ -147,6 +180,8 @@ pub fn setup(cx: Scope) {
     provide_context(cx, (messages, set_messages));
     let (is_model_connected, set_is_model_connected) = create_signal(cx, false);
     provide_context(cx, (is_model_connected, set_is_model_connected));
+    let (model_params, set_model_params) = create_signal(cx, ModelParameters::default());
+    provide_context(cx, (model_params, set_model_params));
     let (model_configs, set_model_configs) = create_signal(cx, Vec::<ModelConfig>::new());
     // let (models, set_models) = create_signal(cx, vec![ModelConfig::default(); 10]);
     provide_context(cx, (model_configs, set_model_configs));
