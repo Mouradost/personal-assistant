@@ -26,7 +26,7 @@ pub struct ModelParams {
 }
 
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 pub struct RoPEOverrides {
     pub frequency_scale: f32,
     pub frequency_base: usize,
