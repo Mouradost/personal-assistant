@@ -61,7 +61,7 @@
     "updater": {
       "active": true,
       "endpoints": [
-        "https://gist.github.com/Mouradost/a398399a40d6b53b0b1acb30734e9777",
+        "https://gist.githubusercontent.com/Mouradost/a398399a40d6b53b0b1acb30734e9777/raw/",
         "https://github.com/Mouradost/personal-assistant/releases/download/latest/latest.json"
       ],
       "dialog": true,
