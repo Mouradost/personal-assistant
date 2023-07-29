@@ -25,11 +25,18 @@ pub struct ModelParams {
     pub model_params: ModelParameters,
 }
 
-
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 pub struct RoPEOverrides {
     pub frequency_scale: f32,
     pub frequency_base: usize,
+}
+impl Default for RoPEOverrides {
+    fn default() -> Self {
+        Self {
+            frequency_scale: 1.0,
+            frequency_base: 10_000,
+        }
+    }
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]

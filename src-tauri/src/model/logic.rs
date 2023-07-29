@@ -69,21 +69,17 @@ pub async fn load_dynamic_model(params: ModelParametersWrapper, state: tauri::St
         Some(model_config) => model_config,
         None => return Err("Model config not found".to_string()),
     };
+    let mut model_params = params.model_params;
+    model_params.rope_overrides = Some(llm::RoPEOverrides::default());
 
     tracing::info!("Got model_config: {:#?}", state.model_config);
-    tracing::info!("Got model_params: {:#?}", params.model_params);
-    // let model_params = llm::ModelParameters {
-    //     use_gpu: true, // not working for now
-    //     ..Default::default()
-    // };
+    tracing::info!("Got model_params: {:#?}", model_params);
 
-    // tracing::info!(use_gpu=model_params.backend(), "");
     let model = llm::load_dynamic(
         Some(model_config.model_architecture),
         &model_config.model_path,
         model_config.tokenizer_source.clone(),
-        // Default::default(),
-        params.model_params,
+        model_params,
         llm::load_progress_callback_stdout,
     )
     .map_err(|err| err.to_string())?;

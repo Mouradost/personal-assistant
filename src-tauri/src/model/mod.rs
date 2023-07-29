@@ -8,13 +8,8 @@ use tauri::{App, Manager};
 pub mod logic;
 pub mod simulated;
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(remote="llm::RoPEOverrides")]
-pub struct RoPEOverrides {
-    pub frequency_scale: f32,
-    pub frequency_base: usize,
-}
-#[derive(Serialize, Deserialize, Debug, Default)]
+// For future llm commits
+#[derive(Deserialize, Debug, Default)]
 #[serde(remote="llm::ModelParameters")]
 pub struct ModelParameters {
     pub prefer_mmap: bool,
@@ -22,11 +17,11 @@ pub struct ModelParameters {
     pub lora_adapters: Option<Vec<PathBuf>>,
     pub use_gpu: bool,
     pub gpu_layers: Option<usize>,
-    #[serde(with = "RoPEOverrides")]
+    #[serde(skip)]
     pub rope_overrides: Option<llm::RoPEOverrides>
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize)]
 pub struct ModelParametersWrapper{
     #[serde(with = "ModelParameters")]
     model_params: llm::ModelParameters

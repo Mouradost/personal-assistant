@@ -311,7 +311,11 @@ pub fn Setting(cx: Scope) -> impl IntoView {
                 // <option>"Falcon"</option>
                 </select>
                 // Upload btn
-                <button type="submit" class="btn" prop:disabled=is_model_connected>
+                <button
+                    type="submit"
+                    class="btn"
+                    prop:disabled=is_model_connected
+                >
                     <Icon class="h-5 w-5" icon=icon!(BsDatabaseAdd)/>
                 </button>
             </form>
