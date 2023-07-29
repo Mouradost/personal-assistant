@@ -26,6 +26,11 @@ pub struct ModelParams {
 }
 
 
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct RoPEOverrides {
+    pub frequency_scale: f32,
+    pub frequency_base: usize,
+}
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
 pub struct ModelParameters {
@@ -34,6 +39,7 @@ pub struct ModelParameters {
     pub lora_adapters: Option<Vec<PathBuf>>,
     pub use_gpu: bool,
     pub gpu_layers: Option<usize>,
+    pub rope_overrides: Option<RoPEOverrides>
 }
 
 impl Default for ModelParameters {
@@ -44,6 +50,7 @@ impl Default for ModelParameters {
             lora_adapters: None,
             use_gpu: false,
             gpu_layers: None,
+            rope_overrides: None
         }
     }
 }
