@@ -19,7 +19,8 @@ leptos_router = { version = "0.4", features = ["csr", "nightly"] }
 # HTML meta-data
 leptos_meta = { version = "0.4", features = ["csr", "nightly"] }
 # Icons
-leptos_icons = { git = "https://github.com/Carlosted/leptos-icons.git" , branch = "main", features = [
+# leptos_icons = { git = "https://github.com/Carlosted/leptos-icons.git" , branch = "main", features = [
+leptos_icons = {version = "0.0.15", features = [
   "macros",
   "BsSendFill",
   "BsMoon",
@@ -44,7 +45,8 @@ futures = "0.3"
 # Javascript premitive
 js-sys = "0.3"
 # Tauri API
-tauri-sys = { git = "https://github.com/Mouradost/tauri-sys.git", features = ["all"]}
+# tauri-sys = { git = "https://github.com/Mouradost/tauri-sys.git", features = ["all"]}
+tauri-sys = { git = "https://github.com/Mouradost/tauri-sys.git", features = ["event", "dialog", "tauri"]}
 # Time
 chrono = "0.4"
 

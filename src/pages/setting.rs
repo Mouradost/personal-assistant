@@ -352,7 +352,8 @@ pub fn Setting(cx: Scope) -> impl IntoView {
                                         <th>
                                             <button
                                                 class="btn"
-                                                prop:disabled=is_model_connected
+                                                // prop:disabled=is_model_connected
+                                                disabled=is_model_connected
                                                 on:click=move |ev| {
                                                     on_click_load_model_config(ev, model.clone())
                                                 }
@@ -361,7 +362,8 @@ pub fn Setting(cx: Scope) -> impl IntoView {
                                             </button>
                                             <button
                                                 class="btn"
-                                                prop:disabled=is_model_connected
+                                                // prop:disabled=is_model_connected
+                                                disabled=is_model_connected
                                                 on:click=move |ev| {
                                                     on_click_delete_model_config(ev, model_clone.name.clone())
                                                 }
