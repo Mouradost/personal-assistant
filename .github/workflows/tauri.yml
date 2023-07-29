@@ -1,6 +1,8 @@
 name: 'TauriPublish'
 on:
   push:
+    paths-ignore:
+      - 'README.md'
     branches:
       - release
       - main
